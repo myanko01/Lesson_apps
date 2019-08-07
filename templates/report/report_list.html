@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block title %}
+    レポート
+{% endblock title %}
+
+{% block main %}
+    <h1>レポート</h1>
+    <form method="get" , action="{% url 'report:index' %}">
+        {{ form }}
+        <input type="submit" value="ボタンを押す">
+    </form>
+    <h2>ジャンルと性別別</h2>
+    <table border="1" width="80%" name="accounts_list">
+        <tr align="center">
+            <th>ジャンル</th>
+            <th>性別</th>
+            <th>レッスン数</th>
+            <th>受講者数</th>
+            <th>売り上げ</th>
+        </tr>
+        {% for report in lesson_gender_analysis_result %}
+            <tr>
+                <td>{{ report.genre_name }}</td>
+                <td>{{ report.gender_name }}</td>
+                <td>{{ report.lesson_num }}</td>
+                <td>{{ report.account_num }}人</td>
+                <td>{{ report.sales }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+
+
+    <h2>ジャンルと年齢層別</h2>
+    <table border="1" width="80%" name="accounts_list">
+        <tr align="center">
+            <th>ジャンル</th>
+            <th>性別</th>
+            <th>年齢層別</th>
+            <th>レッスン数</th>
+            <th>受講者数</th>
+            <th>売り上げ</th>
+        </tr>
+        {% for report in lesson_age_analysis_result %}
+            <tr>
+                <td>{{ report.genre_name }}</td>
+                <td>{{ report.gender_name }}</td>
+                <td>{{ report.age_group }}</td>
+                <td>{{ report.lesson_num }}</td>
+                <td>{{ report.account_num }}人</td>
+                <td>{{ report.sales }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+
+{% endblock %}

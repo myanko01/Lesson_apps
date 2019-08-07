@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+
+{% block title %}
+    レッスン受講記録一覧
+{% endblock title %}
+
+
+{% block main %}
+{% if lesson_list %}
+    <h1>レッスン受講記録一覧</h1>
+    <table border="1" width="80%" name="accounts_list">
+        <tr>
+            <th>ID</th>
+            <th>受講者</th>
+            <th>ジャンル</th>
+            <th>受講日</th>
+            <th>受講時間</th>
+            <th>支払い金額</th>
+            <th></th>
+        </tr>
+        {% for lesson in lesson_list %}
+            <tr>
+                <td>{{ lesson.id }}</td>
+                <td>{{ lesson.account }}</td>
+                <td>{{ lesson.genre }}</td>
+                <td>{{ lesson.attending_date }}</td>
+                <td>{{ lesson.attending_hour }} h</td>
+                <td>{{ lesson.payment }}</td>
+                <td><a href="{% url 'lesson:update' lesson.id %}">編集</a></td>
+            </tr>
+        {% endfor %}
+
+    </table>
+    <a href="{% url 'lesson:create' %}">新規追加</a>
+{% else %}
+    <p>受講履歴がありません</p>
+{% endif %}
+{% endblock %}

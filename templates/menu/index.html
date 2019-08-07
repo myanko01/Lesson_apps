@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}6y[
+    トップページ
+{% endblock %}
+
+{% block main %}
+    <h1>メニュー</h1>
+    <ul>
+        <li><a href="{% url 'account:index' %}">顧客一覧</a></li>  {# urlは {namespace}:{name} nameはaccount/urlsのname #}
+        <li><a href="{% url 'lesson:index' %}">レッスン受講記録</a></li>
+        <li><a href="{% url 'billing:index' %}">月別請求一覧</a></li>
+        <li><a href="{% url 'report:index' %}">レポート</a></li>
+    </ul>
+
+{% endblock %}
+
+

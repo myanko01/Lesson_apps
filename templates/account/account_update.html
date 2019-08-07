@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+
+{% block title %}
+    顧客 編集
+{% endblock title %}
+
+{% block main %}
+
+    <h2>編集画面</h2>
+    <form method="post">
+        {% csrf_token %}
+
+        {{ form.as_p }}　
+
+        <input type="submit" value="登録">
+    </form>
+
+{% endblock %}

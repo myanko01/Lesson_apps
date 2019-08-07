@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}
+    請求一覧
+{% endblock title %}
+
+{% block main %}
+    <h1>請求一覧</h1>
+    <form method="get" action="{% url 'billing:index' %}">
+        {{ form }}
+        <input type="submit" value="ボタンを押す">
+    </form>
+    <table border="1" width="80%" name="accounts_list">
+        <tr align="center">
+            <th>顧客ID</th>
+            <th>顧客名</th>
+            <th>ジャンル</th>
+            <th>合計レッスン数</th>
+            <th>請求金額</th>
+        </tr>
+        {% for billing in aggregate_result %}
+            <tr>
+                <td>{{ billing.account_id }}</td>
+                <td>{{ billing.account_name }}</td>
+                <td>{{ billing.genre_names }}{{ billing.genre_num }}</td>
+                <td>{{ billing.attend_num }}レッスン</td>
+                <td>{{ billing.total_billing }}円</td>
+            </tr>
+        {% endfor %}
+    </table>
+
+{% endblock %}

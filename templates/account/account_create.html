@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+
+{% block title %}
+    顧客 新規追加
+{% endblock title %}
+
+{% block main %}
+
+    <h2>顧客追加</h2>
+    <form action="" method="POST">
+        {% csrf_token %} {# POSTメッセージを通すためのもの。これがないと登録時アクセス禁止エラーがでる #}
+
+        {{ form.as_p }} {# {{ form.as_p }}と書くだけで、フォーム内容を全て表示 #}
+
+        <input type="submit" value="登録">
+    </form>
+
+{% endblock %}
