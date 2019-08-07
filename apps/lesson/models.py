@@ -5,11 +5,8 @@ from django.utils import timezone
 from apps.account.models import Account
 
 
-# 最小値、最大値を決る事ができるMin~, Max~
-
-
 class Genre(models.Model):
-    """ 新規登録時に必要なモデル。このモデルにデータを与えて(ジャンル名とか作って) Lessonモデルに関連付けさせる。
+    """ 新規登録時に必要なモデル。
     """
     name = models.CharField('ジャンル名', max_length=50, unique=True)
     basic_rate = models.IntegerField('基本料金')
@@ -26,7 +23,7 @@ class Genre(models.Model):
 
 
 class Lesson(models.Model):
-    """ 一覧表示用のモデル。Genreで作ったデータがこっちに反映される。
+    """ 一覧表示用のモデル。
     """
     account = models.ForeignKey(Account, on_delete=models.CASCADE, verbose_name='受講者')  # モデル同士の紐付け"ForeignKey"
     genre = models.ForeignKey(Genre, on_delete=models.PROTECT, verbose_name='ジャンル')
@@ -40,7 +37,7 @@ class Lesson(models.Model):
 
     def payment(self):
         measured_rate = 0
-        # self.genre.basic_rate これは下記にも書いてる3500(基本料金)だが、このように継承して値を取ってこれる。
+
         if self.genre.name == "英語":
             measured_rate = self.genre.basic_rate + self.attending_hour * 3500
 
@@ -53,7 +50,7 @@ class Lesson(models.Model):
                 measured_rate = 3300 * 20 + 2500 * 30 + 2500 * (self.attending_hour - 50)
 
         if self.genre.name == "プログラミング":
-            # self.genre.basic_rate　= 20000 モデルで指定した基本料金
+
             if self.attending_hour < 5:
                 measured_rate = self.genre.basic_rate
             elif 20 > self.attending_hour >= 5:

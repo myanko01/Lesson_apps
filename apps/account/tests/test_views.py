@@ -1,7 +1,8 @@
 from django.test import TestCase
 from django.urls import reverse
-from apps.account.tests.factory import AccountFactory
+
 from apps.account.models import Account
+from apps.account.tests.factory import AccountFactory
 
 
 class TestAccountListView(TestCase):

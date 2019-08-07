@@ -1,5 +1,5 @@
-from apps.billing.calc import calculate_account_billing
 from apps.account.consts import CHOICE_GENDER
+from apps.billing.calc import calculate_account_billing
 
 """ 仕様書のレポートのジャンルと性別別に、選択年月のレッスン数・受講者数・売り上げ金額を計算、
     ジャンルと年齢層(性別)別に選択年月のレッスン数・受講者数・売り上げ金額を計算するファイル
@@ -21,7 +21,7 @@ class ReportRow:
         return dict(CHOICE_GENDER)[self.gender]
 
 
-# わざわざclassにしなくてもよい,関数で十分だが今回は関数
+
 class ReportAggregator:
     def __init__(self):
         self.result_list = []
@@ -52,15 +52,15 @@ class ReportAggregator:
         """ ジャンルと年齢層(性別)別に選択年月のレッスン数・受講者数・売り上げ金額を計算する関数
             顧客ごとの辞書でまとめて、リスト化して返す
         """
-        # ジャンル・性別で分類されてたクエリリスト
+
         for genre_name_gender, lesson_list in query_dict.items():
 
-            age_group_dict = {}  # {年齢層：genre_log}
-            # 10才〜80才 range出なくても年齢層のリスト作るのもあり。
+            age_group_dict = {}
+
             for choice_gender_num in range(1, 9):
                 age_group_dict.setdefault(choice_gender_num, [])
                 for genre_log in lesson_list:
-                    # 年齢÷10して 指定した数字(choice_gender)と同じであれば、データを辞書に格納
+
                     if genre_log.account.age // 10 == choice_gender_num:
                         age_group_dict[choice_gender_num].append(genre_log)
 
@@ -68,8 +68,8 @@ class ReportAggregator:
                 age_group_id_set = set()
 
                 report = ReportRow()
-                report.genre_name, report.gender = genre_name_gender  # (genre, gender)
-                # self.age_group = ""　と文字列を指定指定してるので str型
+                report.genre_name, report.gender = genre_name_gender
+
                 report.age_group = str(choice_gender_num) + "0代"
 
                 for age_genre in age_genre_log:

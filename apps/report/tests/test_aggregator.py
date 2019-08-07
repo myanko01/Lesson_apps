@@ -1,10 +1,11 @@
-from django.test import TestCase
-from apps.lesson.tests.factory import GenreFactory, LessonFactory
 from datetime import date
-from apps.report.aggregator import ReportAggregator
-from apps.billing.api import create_target_queryset_dict
+
+from django.test import TestCase
+
 from apps.account.tests.factory import AccountFactory
-from pprint import pprint
+from apps.billing.api import create_target_queryset_dict
+from apps.lesson.tests.factory import GenreFactory, LessonFactory
+from apps.report.aggregator import ReportAggregator
 from apps.report.aggregator import ReportRow
 
 
@@ -40,24 +41,22 @@ class TestAnalyeGenreGenderTrend(TestCase):
         actual = aggregator.analye_genre_gender_trend(target_queryset_dict, self.genre_dict)
 
         self.assertEqual(len(actual), 6)
-        # クラス確認
-        # プロパティ確認
-        # 男・ファイナンス
+
         report = actual[0]
         self.assertEqual(report.genre_name, "ファイナンス")
-        # 女・ファイナンス
+
         report = actual[1]
         self.assertEqual(report.genre_name, "ファイナンス")
-        # 男・プログラミング
+
         report = actual[2]
         self.assertEqual(report.genre_name, "プログラミング")
-        # 女・プログラミング
+
         report = actual[3]
         self.assertEqual(report.genre_name, "プログラミング")
-        # 男・英語
+
         report = actual[4]
         self.assertEqual(report.genre_name, "英語")
-        # 女・英語
+
         report = actual[5]
         self.assertEqual(report.genre_name, "英語")
 
@@ -79,8 +78,7 @@ class TestAnalyeAgeGroupGenderTrend(TestCase):
             # 世代毎に顧客を生成(男女別)
             for age in range(10, 90, 10):
                 account_list.append(AccountFactory(gender=gender, age=age))
-            # そして全顧客それぞれで全ジャンルの受講を登録
-            # for genre_index in range(1, 4):
+
             for genre in ["ファイナンス", "プログラミング", "英語"]:
                 for account in account_list:
                     LessonFactory(genre=genre_dict[genre], account=account)
@@ -101,16 +99,15 @@ class TestAnalyeAgeGroupGenderTrend(TestCase):
 
         # リストの長さがあっているか確認
         self.assertEqual(len(actual), 48)
-        # クラス確認
+
         for i in range(0, len(actual)):
             self.assertIsInstance(actual[i], ReportRow)
 
         age_group_number = 8
-        # プロパティ確認
-        # ファイナンス・男性の各年代の情報を確認(10代)
+
         for i in range(age_group_number):
             report = actual[i]
-            age = f"{i + 1}0代"  # 10~80代生成
+            age = f"{i + 1}0代"
             self.assertEqual(report.genre_name, "ファイナンス")
             self.assertEqual(report.age_group, age)
             self.assertEqual(report.gender, 1)

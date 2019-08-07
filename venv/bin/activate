@@ -37,7 +37,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="/Users/hirayama.yuuka/PycharmProjects/panair-bootcamp/hirayama/exam_project/venv"
+VIRTUAL_ENV="/Users/hirayama.yuuka/Desktop/exam_/venv"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"

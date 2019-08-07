@@ -22,14 +22,13 @@ def calculate_account_billing(account_id, lesson_log_list, genre_dict):
         if lesson_log.account.id == account_id and lesson_log.genre.name == "ファイナンス":
             finance_histories.append(lesson_log)
 
-    # finance_lesson.basic_rate = 3300
     total_attending_hour = 0
     for finance in finance_histories:
         total_attending_hour += finance.attending_hour
     if total_attending_hour:
         if 20 > total_attending_hour:
             total_finance_billing = finance_lesson.basic_rate + total_attending_hour * 3300
-        # finance_lesson.basic_rate = 0　基本料金が隠れてる
+
         elif 50 > total_attending_hour >= 20:
             total_finance_billing = 3300 * 20 + 2800 * (total_attending_hour - 20)
         elif total_attending_hour >= 50:
@@ -44,7 +43,6 @@ def calculate_account_billing(account_id, lesson_log_list, genre_dict):
         if lesson_log.account.id == account_id and lesson_log.genre.name == "プログラミング":
             programming_histories.append(lesson_log)
 
-    # programming_lesson.basic_rate = 20000 基本料金
     total_attending_hour = 0
     for programming in programming_histories:
         total_attending_hour += programming.attending_hour

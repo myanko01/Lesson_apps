@@ -1,12 +1,12 @@
-from urllib import parse
+import datetime
 
 from django.test import TestCase
 from django.urls import reverse
+
 from apps.account.models import Account
-from apps.lesson.models import Genre, Lesson
-import datetime
-from apps.lesson.tests.factory import LessonFactory, GenreFactory
 from apps.account.tests.factory import AccountFactory
+from apps.lesson.models import Genre, Lesson
+from apps.lesson.tests.factory import LessonFactory, GenreFactory
 
 
 class TestLessonListView(TestCase):

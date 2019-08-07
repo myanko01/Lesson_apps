@@ -1,6 +1,6 @@
 import factory
+
 from apps.account.models import Account
-import random
 
 
 class AccountFactory(factory.django.DjangoModelFactory):

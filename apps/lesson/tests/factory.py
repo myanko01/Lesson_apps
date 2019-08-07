@@ -1,8 +1,10 @@
-import factory
-from apps.lesson.models import Genre, Lesson
-from apps.account.tests.factory import AccountFactory
 import random
+
+import factory
 from django.utils import timezone
+
+from apps.account.tests.factory import AccountFactory
+from apps.lesson.models import Genre, Lesson
 
 
 class GenreFactory(factory.django.DjangoModelFactory):

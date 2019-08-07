@@ -1,7 +1,9 @@
+from datetime import date
+
 from django.test import TestCase
 from django.urls import reverse
+
 from apps.lesson.tests.factory import GenreFactory, LessonFactory
-from datetime import date
 
 
 class TestReportListView(TestCase):
@@ -20,7 +22,6 @@ class TestReportListView(TestCase):
         GenreFactory(name="ファイナンス")
         GenreFactory(name="プログラミング")
 
-        # 日付送信
         response = self.client.get(reverse("report:index"), data={"billing_yyyymm": "2019/08"})
 
         self.assertContains(response, "英語")
@@ -32,10 +33,9 @@ class TestReportListView(TestCase):
         GenreFactory(name="英語")
         GenreFactory(name="ファイナンス")
         GenreFactory(name="プログラミング")
-        # 日付を送信
+
         response = self.client.get(reverse("report:index"), data={"billing_yyyymm": "2019/08"})
 
-        # ジャンルと年齢層別の表
         self.assertContains(response, "ジャンル")
         self.assertContains(response, "性別")
         self.assertContains(response, "レッスン数")
